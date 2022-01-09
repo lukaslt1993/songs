@@ -60,8 +60,7 @@ public class ArtistService {
     }
 
     public List<Artist> getArtistsFromDb(String name) {
-        return StreamSupport.stream(repo.findAllByArtistName(name).spliterator(), false)
-                .collect(Collectors.toList());
+        return repo.findAllByArtistName(name);
     }
 
     public Artist getArtistFromFile(Long id) throws IOException {

@@ -48,8 +48,9 @@ public class UserControllerTest {
         admin.put("password", DataLoader.ADMIN);
         String json = mapper.writeValueAsString(admin);
         mvc.perform(MockMvcRequestBuilders.post(EndpointNames.LOGIN)
-                .contentType(MediaType.APPLICATION_JSON).content(json))
-                .andExpect(MockMvcResultMatchers.status().isOk());
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json)
+        ).andExpect(MockMvcResultMatchers.status().isOk());
     }
 
     @Test
@@ -60,16 +61,16 @@ public class UserControllerTest {
         user.put("password", "user");
         String json = mapper.writeValueAsString(user);
         mvc.perform(MockMvcRequestBuilders.post(EndpointNames.USER)
-                .contentType(MediaType.APPLICATION_JSON).content(json))
-                .andExpect(MockMvcResultMatchers.status().isOk());
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json)
+        ).andExpect(MockMvcResultMatchers.status().isOk());
     }
 
     @Test
     @WithMockUser
     @Order(3)
     public void userCanNotSeeOthers() throws Exception {
-        mvc.perform(MockMvcRequestBuilders
-                .get(EndpointNames.USER))
+        mvc.perform(MockMvcRequestBuilders.get(EndpointNames.USER))
                 .andExpect(MockMvcResultMatchers.status().is(HttpStatus.UNAUTHORIZED.value()));
     }
 
@@ -77,8 +78,7 @@ public class UserControllerTest {
     @WithMockUser(roles={"ADMIN"})
     @Order(4)
     public void adminCanSeeOthers() throws Exception {
-        mvc.perform(MockMvcRequestBuilders
-                .get(EndpointNames.USER))
+        mvc.perform(MockMvcRequestBuilders.get(EndpointNames.USER))
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
 

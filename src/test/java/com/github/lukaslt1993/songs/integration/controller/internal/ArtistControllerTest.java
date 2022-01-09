@@ -65,8 +65,9 @@ public class ArtistControllerTest {
         artist.put("artistName", "The Lucky Seven");
         String json = mapper.writeValueAsString(artist);
         mvc.perform(MockMvcRequestBuilders.post(EndpointNames.ARTIST)
-                .contentType(MediaType.APPLICATION_JSON).content(json))
-                .andExpect(MockMvcResultMatchers.status().is(HttpStatus.FORBIDDEN.value()));
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json)
+        ).andExpect(MockMvcResultMatchers.status().is(HttpStatus.FORBIDDEN.value()));
     }
 
     @Test
@@ -79,8 +80,9 @@ public class ArtistControllerTest {
         artist.put("artistName", "The Lucky Seven");
         String json = mapper.writeValueAsString(artist);
         mvc.perform(MockMvcRequestBuilders.post(EndpointNames.ARTIST)
-                .contentType(MediaType.APPLICATION_JSON).content(json))
-                .andExpect(MockMvcResultMatchers.status().isOk());
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(json)
+        ).andExpect(MockMvcResultMatchers.status().isOk());
     }
 
 }
