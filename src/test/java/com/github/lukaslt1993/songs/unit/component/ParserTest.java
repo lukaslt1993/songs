@@ -29,14 +29,14 @@ public class ParserTest {
     void getAllSongs() throws IOException {
         List<Song> list = parser.getSongs();
         Assertions.assertFalse(list.isEmpty());
-        Assertions.assertTrue(list.size() == 100);
+        Assertions.assertEquals(100, list.size());
     }
 
     @Test
     void getSongs() throws IOException {
         List<Song> list = parser.getSongs("The House of the Rising Sun");
         Assertions.assertFalse(list.isEmpty());
-        Assertions.assertTrue(list.size() == 1);
+        Assertions.assertEquals(1, list.size());
     }
 
     @Test
@@ -50,14 +50,14 @@ public class ParserTest {
     void getAllArtists() throws IOException {
         List<Artist> list = parser.getArtists();
         Assertions.assertFalse(list.isEmpty());
-        Assertions.assertTrue(list.size() == 100);
+        Assertions.assertEquals(100, list.size());
     }
 
     @Test
     void getArtists() throws IOException {
         List<Artist> list = parser.getArtists("Desperation Band");
         Assertions.assertFalse(list.isEmpty());
-        Assertions.assertTrue(list.size() == 1);
+        Assertions.assertEquals(1, list.size());
     }
 
 }

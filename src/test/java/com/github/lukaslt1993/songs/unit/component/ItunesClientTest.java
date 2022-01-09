@@ -58,9 +58,11 @@ public class ItunesClientTest {
     private void mockGetForObject(Object searchFor) {
         Mockito
                 .when(
-                        restTemplateMock.getForObject(getUri(searchFor.toString()),
-                                ArgumentMatchers.<Class<String>>any())).
-                thenReturn(getJson());
+                        restTemplateMock.getForObject(
+                                getUri(searchFor.toString()),
+                                ArgumentMatchers.<Class<String>>any()
+                        )
+                ).thenReturn(getJson());
     }
 
     @BeforeEach
