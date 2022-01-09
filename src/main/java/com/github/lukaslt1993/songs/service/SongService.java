@@ -1,5 +1,7 @@
 package com.github.lukaslt1993.songs.service;
 
+import com.github.lukaslt1993.songs.component.ItunesClient;
+import com.github.lukaslt1993.songs.component.Parser;
 import org.springframework.stereotype.Service;
 
 import com.github.lukaslt1993.songs.exception.EntityCreationException;

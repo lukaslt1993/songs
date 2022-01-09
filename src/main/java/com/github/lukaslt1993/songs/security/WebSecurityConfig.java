@@ -15,7 +15,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-import com.github.lukaslt1993.songs.EndpointNames;
+import com.github.lukaslt1993.songs.controller.EndpointNames;
 import com.github.lukaslt1993.songs.model.User;
 import com.github.lukaslt1993.songs.repository.UserRepository;
 import com.github.lukaslt1993.songs.security.SecurityConstants.Role;
@@ -39,7 +39,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         this.tokenSecret = tokenSecret;
     }
 
-    private class MyUserDetailsService implements UserDetailsService {
+    private class UserDetailsServiceImpl implements UserDetailsService {
         @Override
         public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
             User user = repo.findFirstByUserName(username);
@@ -55,7 +55,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers(HttpMethod.POST, EndpointNames.LOGIN).permitAll()
+        http.authorizeRequests()
+                .antMatchers(HttpMethod.POST, EndpointNames.LOGIN).permitAll()
                 .antMatchers(HttpMethod.POST, EndpointNames.USER).permitAll()
                 .antMatchers("/v2/api-docs", "/swagger*/**").permitAll()
                 .antMatchers(HttpMethod.POST, EndpointNames.SONG).hasRole(Role.ADMIN.getValue())
@@ -66,7 +67,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(HttpMethod.DELETE, EndpointNames.ARTIST).hasRole(Role.ADMIN.getValue())
                 .anyRequest().authenticated().and().csrf().disable()
                 .addFilter(new AuthenticationFilter(authenticationManager(), tokenSecret))
-                .addFilter(new AuthorizationFilter(authenticationManager(), tokenSecret, new MyUserDetailsService()))
+                .addFilter(new AuthorizationFilter(authenticationManager(), tokenSecret, new UserDetailsServiceImpl()))
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
@@ -78,7 +79,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        return new MyUserDetailsService();
+        return new UserDetailsServiceImpl();
     }
 
 }
