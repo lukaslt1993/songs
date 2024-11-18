@@ -4,7 +4,7 @@ Gets song information from iTunes API and optionally saves it to the local DB. S
 I wrote this to test many capabilities of Spring Boot in a single project
 
 ## How to run
-- It's required to run docker database first. __cd__ to __docker/db__ and execute __docker-compose up -d__
+- It's required to run docker database first: __cd__ to __docker/db__ and execute __docker-compose up -d__
 - Then you could either execute the app via IDE or __cd__ to __docker/web__ and execute __docker-compose up__
 
 ## How to use
