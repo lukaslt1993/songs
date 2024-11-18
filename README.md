@@ -1,6 +1,5 @@
-# songs
-Songs API with iTunes support
-
+# Description
+Gets song information from iTunes API and optionally saves it to the local DB
 I wrote this to test many Spring Boot tools in a single project. Includes roles and authorization
 
 ## How to run
