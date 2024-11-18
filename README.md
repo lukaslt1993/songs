@@ -1,6 +1,7 @@
 # Description
-Gets song information from iTunes API and optionally saves it to the local DB. Supports users (who can collect their list of songs), user roles (normal, admin) and authorization using JWT<br>
-I wrote this to test many Spring Boot tools in a single project. Includes roles and authorization
+Gets song information from iTunes API and optionally saves it to the local DB. Supports users (who can collect their list of songs), user roles (normal, admin) and authorization using JWT
+
+I wrote this to test many capabilities of Spring Boot in a single project
 
 ## How to run
 - It's required to run docker database first. __cd__ to __docker/db__ and execute __docker-compose up -d__
